@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Mijnuri</a>
+
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">მიჯნურები</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">სია</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">მესიჯები</a>
+      </li>
+    </ul>
+
+    <div *ngIf="loggedIn()" class="dropdown">
+      <a class="dropdown-toggle text-light"> გამარჯობა მომხმარებელო </a>
+
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item"
+            ><i class="fas fa-user"></i>პროფილის შეცვლა</a
+          >
+        </li>
+        <li><div class="dropdown-divider"></div></li>
+        <li>
+          <a class="dropdown-item"><i class="fas fa-sign-out"></i>გასვლა</a>
+        </li>
+      </ul>
+    </div>
+
+    <form
+      *ngIf="!loggedIn()"
+      #loginForm="ngForm"
+      (ngSubmit)="login()"
+      class="d-flex"
+    >
+      <input
+        class="form-control me-2"
+        type="text"
+        placeholder="მომხმარებელი"
+        [(ngModel)]="model.username"
+        name="username"
+      />
+      <input
+        class="form-control me-2"
+        type="password"
+        placeholder="პაროლი"
+        [(ngModel)]="model.password"
+        name="password"
+        required
+      />
+      <button
+        [disabled]="!loginForm.valid"
+        class="btn btn-success"
+        type="submit"
+        required
+      >
+        შესვლა
+      </button>
+    </form>
+  </div>
+</nav>
