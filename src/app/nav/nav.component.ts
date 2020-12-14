@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 
@@ -12,7 +13,8 @@ export class NavComponent implements OnInit {
 
   constructor(
     public _authService: AuthService,
-    private _alertify: AlertifyService
+    private _alertify: AlertifyService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -26,6 +28,10 @@ export class NavComponent implements OnInit {
       (error) => {
         console.log(error);
         this._alertify.error(error);
+      },
+      () => {
+        //use router sevice to navcigate by url
+        this._router.navigate(['/members']);
       }
     );
   }
@@ -38,5 +44,6 @@ export class NavComponent implements OnInit {
     localStorage.removeItem('token');
     console.log('გახვედით');
     this._alertify.message('გახვედით სისტემიდან');
+    this._router.navigate(['/']);
   }
 }

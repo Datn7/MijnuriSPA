@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Mijnuri</a>
+      <a class="navbar-brand" [routerLink]="['/']">Mijnuri</a>
 
       <ul *ngIf="loggedIn()" class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">მიჯნურები</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/members']">მიჯნურები</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">სია</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/lists']">სია</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">მესიჯები</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/messages']">მესიჯები</a>
         </li>
       </ul>
 
@@ -42,14 +42,14 @@
         class="d-flex"
       >
         <input
-          class="form-control me-2"
+          class="form-control mr-2"
           type="text"
           placeholder="მომხმარებელი"
           [(ngModel)]="model.username"
           name="username"
         />
         <input
-          class="form-control me-2"
+          class="form-control mr-2"
           type="password"
           placeholder="პაროლი"
           [(ngModel)]="model.password"
