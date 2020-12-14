@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { AuthService } from '../_services/auth.service';
 export class RegisterComponent implements OnInit {
   model: any = {};
 
-  constructor(private _authService: AuthService) {}
+  constructor(
+    private _authService: AuthService,
+    private _alertify: AlertifyService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -18,9 +22,11 @@ export class RegisterComponent implements OnInit {
     this._authService.register(this.model).subscribe(
       () => {
         console.log('წარმატებით დარეგისტრირდით');
+        this._alertify.success('წარმატებით გაიარეთ რეგისტრაცია');
       },
       (error) => {
         console.log(error);
+        this._alertify.error(error);
       }
     );
   }
