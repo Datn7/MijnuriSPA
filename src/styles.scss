@@ -4,6 +4,16 @@
 @import "../node_modules/alertifyjs/build/css/alertify.min.css";
 @import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
 
+@font-face {
+  font-family: "Qartuli";
+  src: url("/assets/fonts/bpg_banner_extrasquare.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Qartuli", cursive;
+}
+
 .tab-panel {
   border: 1px solid #ddd;
   padding: 10px;
