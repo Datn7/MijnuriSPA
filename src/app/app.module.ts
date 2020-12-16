@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_interceptors/error.interceptor';
@@ -31,6 +31,11 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { kaLocale } from 'ngx-bootstrap/locale';
+defineLocale('ka', kaLocale);
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,10 +68,12 @@ export class CustomHammerConfig extends HammerGestureConfig {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     FileUploadModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
