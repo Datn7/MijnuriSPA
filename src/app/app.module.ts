@@ -37,6 +37,8 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { kaLocale } from 'ngx-bootstrap/locale';
 defineLocale('ka', kaLocale);
 
+import { TimeAgoPipe } from 'time-ago-pipe';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }

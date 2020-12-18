@@ -31,12 +31,12 @@
 
         <div>
           <strong>ბოლოს აქტიური:</strong>
-          <p>{{ user.lastActive }}</p>
+          <p>{{ user.lastActive | date: "mediumDate" }}</p>
         </div>
 
         <div>
           <strong>წევრი:</strong>
-          <p>{{ user.created }} - დან</p>
+          <p>{{ user.created | date: "mediumDate" }} - დან</p>
         </div>
       </div>
       <div class="card-footer">
