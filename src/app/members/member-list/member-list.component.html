@@ -1,7 +1,115 @@
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <h2>ნაპოვნია - {{ pagination.totalItems }} ადამიანი</h2>
+    </div>
+  </div>
+</div>
+
 <div class="container mt-5">
+  <div class="row">
+    <form
+      class="form-inline"
+      #form="ngForm"
+      (ngSubmit)="loadUsers()"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="minAge">ასაკი</label>
+        <input
+          type="number"
+          class="form-control"
+          style="width: 70px; padding: 3px"
+          id="minAge"
+          name="minAge"
+          [(ngModel)]="userParams.minAge"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="maxAge">დან</label>
+        <input
+          type="number"
+          class="form-control"
+          style="width: 70px; padding: 3px"
+          id="maxAge"
+          name="maxAge"
+          [(ngModel)]="userParams.maxAge"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="gender">მდე ჩვენება: </label>
+        <select
+          class="form-control"
+          style="width: 130px"
+          id="gender"
+          name="gender"
+          [(ngModel)]="userParams.gender"
+        >
+          <option *ngFor="let gender of genderList" [value]="gender.value">
+            {{ gender.display }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-left: 10px">
+        გაფილტვრა
+      </button>
+      <button
+        type="button"
+        class="btn btn-info"
+        style="margin-left: 10px"
+        (click)="resetFilters()"
+      >
+        დარესეტება
+      </button>
+
+      <div class="col">
+        <div class="btn-group float-right">
+          <button
+            type="button"
+            name="orderBy"
+            class="btn btn-primary"
+            btnRadio="lastActive"
+            [(ngModel)]="userParams.orderBy"
+            (click)="loadUsers()"
+          >
+            ბოლოს აქტიური
+          </button>
+          <button
+            type="button"
+            name="orderBy"
+            class="btn btn-primary"
+            btnRadio="created"
+            [(ngModel)]="userParams.orderBy"
+            (click)="loadUsers()"
+          >
+            ახალი
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br />
+
   <div class="row">
     <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
       <app-member-card [user]="user"></app-member-card>
     </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
 </div>

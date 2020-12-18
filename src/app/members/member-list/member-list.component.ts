@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination.model';
 import { User } from '../../_models/user.model';
 import { AlertifyService } from '../../_services/alertify.service';
 import { UserService } from '../../_services/user.service';
@@ -11,29 +12,59 @@ import { UserService } from '../../_services/user.service';
 })
 export class MemberListComponent implements OnInit {
   users: User[];
+  user: User = JSON.parse(localStorage.getItem('user'));
+  genderList = [
+    { value: 'male', display: 'კაცები' },
+    { value: 'female', display: 'ქალები' },
+  ];
+  userParams: any = {};
+  pagination: Pagination;
 
   constructor(
-    private _userService: UserService,
-    private _alertifyService: AlertifyService,
-    private _route: ActivatedRoute
+    private userService: UserService,
+    private alertify: AlertifyService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this._route.data.subscribe((data) => {
-      this.users = data['users'];
+  ngOnInit() {
+    this.route.data.subscribe((data) => {
+      this.users = data['users'].result;
+      this.pagination = data['users'].pagination;
     });
+
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+    this.userParams.orderBy = 'lastActive';
   }
 
-  /*
-  loadUsers() {
-    this._userService.getUsers().subscribe(
-      (users: User[]) => {
-        this.users = users;
-      },
-      (error) => {
-        this._alertifyService.error(error);
-      }
-    );
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadUsers();
   }
- */
+
+  resetFilters() {
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 99;
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.userService
+      .getUsers(
+        this.pagination.currentPage,
+        this.pagination.itemsPerPage,
+        this.userParams
+      )
+      .subscribe(
+        (res: PaginatedResult<User[]>) => {
+          this.users = res.result;
+          this.pagination = res.pagination;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
+  }
 }

@@ -38,6 +38,8 @@ import { kaLocale } from 'ngx-bootstrap/locale';
 defineLocale('ka', kaLocale);
 
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -76,6 +78,8 @@ export class CustomHammerConfig extends HammerGestureConfig {
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
