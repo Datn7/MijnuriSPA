@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  @Output() cancelRegister = new EventEmitter();
   model: any = {};
   registerForm: FormGroup;
   user: User;
@@ -124,5 +125,6 @@ export class RegisterComponent implements OnInit {
 
   cancel() {
     console.log('უკან გახვედით');
+    this.cancelRegister.emit(false);
   }
 }

@@ -1,5 +1,5 @@
-<div class="container mt-5">
-  <div *ngIf="!registerMode" style="text-align: center">
+<div class="container-fluid mt-3">
+  <div *ngIf="!registerMode" style="text-align: center; margin-top: 50px">
     <h1>მიჯნურობის ცეცხლით დაწვა</h1>
     <p class="lead">
       მიჯნურს სჭირდება:გარეგნული სილამაზ (თვალად სიტურფე),
@@ -17,7 +17,9 @@
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register></app-register>
+        <app-register
+          (cancelRegister)="cancelRegisterMode($event)"
+        ></app-register>
       </div>
     </div>
   </div>
